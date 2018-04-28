@@ -2,10 +2,10 @@
 
 <html>
 	<head>
-		<title>Página de ejemplo</title>
+		<title>App Museos Madrid (listado)</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
+		<link rel="stylesheet" href="{% static 'css/museosMadrid_listado.css' %}">
 		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
 	</head>
 	<body>		
@@ -13,13 +13,13 @@
     		<p>Volver al home: <a href="/">Inicio</a></p>
 		</div>	
 
-		<div>
-			<h1>Listado de museos</h1>
+		<div class="page-header">
+			<p><h1 class="main-title">Listado de museos</h1></p>
 		</div>
 
 		{% for museo in museos %}
 			<div class="museo">
-				<h3><a href="">{{ museo.nombre }}</a></h3>
+				<h3>{{ museo.nombre }}</h3>
 				<p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">enlace</a></p>
 			</div>
 		{% endfor %}

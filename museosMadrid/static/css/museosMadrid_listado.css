@@ -1,0 +1,25 @@
+
+
+.page-header {
+	background-color: #0000FF;
+	margin-top: 0;
+	padding: 20px 20px 20px 40px;
+}
+
+.main-title{
+	color: #FFFFFF;
+}
+
+h3 {
+	color: #FCA205;
+	font-family: 'Lobster';
+    font-weight : bold;
+}
+
+body {
+	padding-left: 20px;
+}
+
+.museo {
+	margin-bottom: 70px;
+}

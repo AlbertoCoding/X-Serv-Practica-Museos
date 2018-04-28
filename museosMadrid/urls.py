@@ -9,7 +9,7 @@ urlpatterns = [
   #  url(r'^usuario/', views.) #Para el /usuario/xml
   #  url(r'^museos$', views.todosLosMuseos),
     url(r'^museos$', views.museos_list),
-    url(r'^museos/', views.infoMuseo),
+    url(r'^museos/(\d+)', views.infoMuseo),
     url(r'^$', views.home),
     url(r'^', views.error)
 ]

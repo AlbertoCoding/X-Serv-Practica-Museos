@@ -31,11 +31,9 @@ def museos_list(request): #Para una alternativa /museos2
 
 
 
-def infoMuseo(request): #Para el /museos/id
-    respuesta = 'Volver a la página de inicio: ' + '<a href="' + '/">' + 'Inicio' + '</a></br>'
-    respuesta += "Datos del museo"
-
-    return HttpResponse(respuesta)
+def infoMuseo(request, id_museo): #Para el /museos/id
+    museo = Museo.objects.get(museo_id=5349304)
+    return render(request, 'museosMadrid/museo_info.html', {'museo': museo})
 
 
 
