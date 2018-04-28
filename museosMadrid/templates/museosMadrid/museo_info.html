@@ -48,7 +48,13 @@
 		</div>
 
 		<div>
-
+			</br>
+			<p><h2>Publique un comentario:</h2></p>
+			<form action="/museos/{{ museo.museo_id }}" method="POST">
+				{% csrf_token %}
+				<label for="comentario"></label><input name="comentario" type="text" />
+				<button type="submit">Comentar</button>
+			</form>
 		</div>
 
 	</body>

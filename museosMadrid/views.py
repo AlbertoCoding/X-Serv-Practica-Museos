@@ -32,9 +32,14 @@ def museos_list(request): #Para una alternativa /museos2
 
 
 def infoMuseo(request, id_museo): #Para el /museos/id
-    museo = Museo.objects.get(museo_id=5349304)
-    return render(request, 'museosMadrid/museo_info.html', {'museo': museo})
+	
+    museo = Museo.objects.get(museo_id=id_museo)
 
+    if request.method == 'GET':
+        return render(request, 'museosMadrid/museo_info.html', {'museo': museo})
+    elif request.method == 'POST':
+        comentario = request.POST.get('comentario', None)
+        return HttpResponse('<h3>Comentario publicado: </h3><p>' + comentario + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
 
 
 def about(request): #Para el /about
@@ -48,13 +53,14 @@ def register(request): #Para el /register
         return render(request, 'museosMadrid/register.html', {})
 
     elif request.method == 'POST':
+		
         username = request.POST.get('username', None) #Para evitar que haya users iguales
         password = request.POST.get('password', None)
         email = request.POST.get('email', None)
         user = User.objects.create_user(username, email, password)
         #user.last_name = 'Lennon'
         user.save()
-        return HttpResponse('Usuario creado')
+        return HttpResponse('<h3>Usuario creado</h3>')
 
 
 

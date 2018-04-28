@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -56,9 +57,10 @@ class Museo(models.Model):
 
 
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.OneToOneField(User)
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
     museos = models.ManyToManyField(Museo, blank=True)
+    color_fondo = models.CharField(max_length=15, blank=True)
 
 
     def __str__(self):
