@@ -47,7 +47,7 @@ def infoMuseo(request, id_museo): #Para el /museos/id
         texto_comentario_nuevo = request.POST.get('comentario', None)
         autor_comentario_nuevo = "examen18"
         comentario_nuevo = Comentario(autor=autor_comentario_nuevo, texto=texto_comentario_nuevo, museo=m)
-  #      comentario_nuevo.save()
+        comentario_nuevo.save()
   #      comentario_nuevo.museo.add(m)
         return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
 
