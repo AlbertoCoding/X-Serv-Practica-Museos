@@ -46,6 +46,7 @@ class Museo(models.Model):
 #   datos_contactos =
     telefono = models.PositiveIntegerField(blank=True, null=True)
     email = models.CharField(max_length=80, blank=True, null=True)
+    fax = models.PositiveIntegerField(blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
 
