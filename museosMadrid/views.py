@@ -30,7 +30,8 @@ def todosLosMuseos(request): #Para el /museos
     return HttpResponse(respuesta)
 
 def museos_list(request): #Para una alternativa /museos2
-    return render(request, 'museosMadrid/museos_list.html', {})
+    museos = Museo.objects.all()
+    return render(request, 'museosMadrid/museos_list.html', {'museos': museos})
 
 
 

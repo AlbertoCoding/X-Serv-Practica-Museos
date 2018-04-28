@@ -1,21 +1,27 @@
+{% load staticfiles %}
+
 <html>
 	<head>
 		<title>Página de ejemplo</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
 	</head>
 	<body>		
 		<div>
     		<p>Volver al home: <a href="/">Inicio</a></p>
-			<p>Hi there!</p>
 		</div>	
 
 		<div>
-			<p>Museo1</p>
-			<p>URL1</p>
+			<h1>Listado de museos</h1>
 		</div>
 
-		<div>
-			<p>Museo2</p>
-			<p>URL2</p>
-		</div>
-</body>
+		{% for museo in museos %}
+			<div>
+				<h3><a href="">{{ museo.nombre }}</a></h3>
+				<p>{{ museo.descripcion|linebreaksbr }}</p>    
+			</div>
+		{% endfor %}
+	</body>
 </html>
