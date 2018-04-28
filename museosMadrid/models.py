@@ -14,6 +14,7 @@ class Comentario(models.Model):
 
 
 class Museo(models.Model):
+    museo_id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
     direccion = models.TextField()

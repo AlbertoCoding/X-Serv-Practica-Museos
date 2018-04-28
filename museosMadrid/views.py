@@ -7,6 +7,7 @@ from .models import Museo, Usuario, Comentario
 def home(request): #Para el /
 #    return render(request, 'museosMadrid/home.html', {})
     respuesta = '<h2>"Esto es la pagina de inicio (home)"</h2>'
+    respuesta += 'Si quieres ver todos los museos: ' + '<a href="' + '/museos">' + 'Listado de museos' + '</a></br>'
     return HttpResponse(respuesta)
 
 
@@ -16,8 +17,9 @@ def todosLosMuseos(request): #Para el /museos
     respuesta = '<h2>' + "LISTADO DE TODOS LOS MUSEOS:" + '</h2>'
     for elem in Museos:
         respuesta += '<li>' + '##Datos Museo##' + '</li>'
+        respuesta += 'Id: ' + str(elem.museo_id) + '</br>'
         respuesta += 'Nombre: ' + elem.nombre + '</br>'
-        respuesta += 'Enlace a la web: ' + '<a href="' + '/museos/' + elem.nombre + '">' + elem.nombre + '</a></br>'
+        respuesta += 'Enlace a la web: ' + '<a href="' + '/museos/' + str(elem.museo_id) + '">' + elem.nombre + '</a></br>'
         respuesta += '</br>'
 
     return HttpResponse(respuesta)
