@@ -8,12 +8,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request): #Para el /
-#    return render(request, 'museosMadrid/home.html', {})
-    respuesta = '<h2>"Esto es la pagina de inicio (home)"</h2>'
-    respuesta += 'Si quieres ver todos los museos: ' + '<a href="' + '/museos">' + 'Todos' + '</a>'
-    respuesta += '</br></br>' + 'About de la web: ' + '<a href="' + '/about">' + 'About' + '</a></br>'
-    respuesta += 'Si no tienes usuario: ' + '<a href="/register">' + '¡REGISTRATE!' + '</a>'
-    return HttpResponse(respuesta)
+	return render(request, 'museosMadrid/home.html', {})
 
 
 
@@ -45,12 +40,7 @@ def infoMuseo(request): #Para el /museos/id
 
 
 def about(request): #Para el /about
-    respuesta = 'Volver a la página de inicio: ' + '<a href="' + '/">' + 'Inicio' + '</a></br>'
-    respuesta += '<h2>Esta es la pagina de about</h1>'
-    respuesta += 'Autor de la página: ' + '<h4>Alberto Rafael Rodríguez Iglesias</h4></br>'
-    respuesta += 'Titulación: ' + '<h4>Grado de Ingeniería en Tecnologías de la Telecomunicación en la Universidad Rey Juan Carlos (URJC)</h4></br>'
-    respuesta += 'Madrid, España</br>'
-    return HttpResponse(respuesta)
+	return render(request, 'museosMadrid/about.html', {})
 
 
 def register(request): #Para el /register
