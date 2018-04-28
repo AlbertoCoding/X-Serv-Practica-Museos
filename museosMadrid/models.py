@@ -5,18 +5,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-
-
-class Comentario(models.Model):
-    autor = models.CharField(max_length=50)
-    texto = models.TextField()
-
-    def __str__(self):
-        return self.autor + ": " + self.texto
-
-
-
-
 # Datos de cada museo:
 # ID-ENTIDAD (PK), NOMBRE, DESCRIPCION-ENTIDAD, HORARIO, TRANSPORTE, ACCESIBILIDAD, CONTENT-URL, LOCALIZACION{NOMBRE-VIA, CLASE-VIAL, TIPO-NUM, NUM, LOCALIDAD, PROVINCIA, CODIGO-POSTAL, BARRIO, DISTRITO, COORDENADA-X, COORDENADA-Y, LATITUD, LONGITUD}, DATOSCONTACTOS, TIPOS
 
@@ -49,10 +37,20 @@ class Museo(models.Model):
     email = models.CharField(max_length=80, blank=True, null=True)
     fax = models.PositiveIntegerField(blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
-    comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
 
     def  __str__(self):
         return " " + self.nombre + ": " + self.descripcion + "( " + self.url + " )"
+
+
+
+class Comentario(models.Model):
+    autor = models.CharField(max_length=50)
+    texto = models.TextField()
+    museo = models.ForeignKey(Museo, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.autor + ": " + self.texto
+
 
 
 

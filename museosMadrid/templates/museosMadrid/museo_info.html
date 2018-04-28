@@ -23,25 +23,25 @@
 		</div>
 
 		<div>
-			<p style="display:inline">Museo ID: </p><h3 style="display:inline">{{ museo.museo_id }}</h3></br>
-			<p style="display:inline">Nombre: </p><h3 style="display:inline">{{ museo.nombre }}</h3></br>
-			<p style="display:inline">Descripción: </p><h3 style="display:inline">{{ museo.descripcion }}</h3></br>
-			<p style="display:inline">Horario: </p><h3 style="display:inline">{{ museo.horario}}</h3></br>
-			<p style="display:inline">Transporte: </p><h3 style="display:inline">{{ museo.transporte}}</h3></br>
-			<p style="display:inline">Accesibilidad: </p><h3 style="display:inline">{{ museo.accesibilidad}}</h3></br>
-			<p style="display:inline">URL: </p><h3 style="display:inline">{{ museo.url}}</h3></br>
-			<p style="display:inline">Nombre Via: </p><h3 style="display:inline">{{ museo.nombre_via}}</h3></br>
-			<p style="display:inline">Clase Vial: </p><h3 style="display:inline">{{ museo.clase_vial}}</h3></br>
-			<p style="display:inline">Tipo Num: </p><h3 style="display:inline">{{ museo.tipo_num}}</h3></br>
-			<p style="display:inline">Localidad: </p><h3 style="display:inline">{{ museo.localidad}}</h3></br>
-			<p style="display:inline">Provincia: </p><h3 style="display:inline">{{ museo.provincia}}</h3></br>
-			<p style="display:inline">Codigo postal: </p><h3 style="display:inline">{{ museo.codigo_postal}}</h3></br>
-			<p style="display:inline">Barrio: </p><h3 style="display:inline">{{ museo.barrio}}</h3></br>
-			<p style="display:inline">Distrito: </p><h3 style="display:inline">{{ museo.distrito}}</h3></br>
-			<p style="display:inline">Tipo: </p><h3 style="display:inline">{{ museo.tipo}}</h3></br>
-			<p style="display:inline">Telefono: </p><h3 style="display:inline">{{ museo.telefono}}</h3></br>
-			<p style="display:inline">Email: </p><h3 style="display:inline">{{ museo.email}}</h3></br>
-			<p style="display:inline">Fax: </p><h3 style="display:inline">{{ museo.fax}}</h3></br>
+			<p style="display:inline">Museo ID: </p><h3 style="display:inline">{{ m.museo_id }}</h3></br>
+			<p style="display:inline">Nombre: </p><h3 style="display:inline">{{ m.nombre }}</h3></br>
+			<p style="display:inline">Descripción: </p><h3 style="display:inline">{{ m.descripcion }}</h3></br>
+			<p style="display:inline">Horario: </p><h3 style="display:inline">{{ m.horario}}</h3></br>
+			<p style="display:inline">Transporte: </p><h3 style="display:inline">{{ mtransporte}}</h3></br>
+			<p style="display:inline">Accesibilidad: </p><h3 style="display:inline">{{ m.accesibilidad}}</h3></br>
+			<p style="display:inline">URL: </p><h3 style="display:inline">{{ m.url}}</h3></br>
+			<p style="display:inline">Nombre Via: </p><h3 style="display:inline">{{ m.nombre_via}}</h3></br>
+			<p style="display:inline">Clase Vial: </p><h3 style="display:inline">{{ m.clase_vial}}</h3></br>
+			<p style="display:inline">Tipo Num: </p><h3 style="display:inline">{{ m.tipo_num}}</h3></br>
+			<p style="display:inline">Localidad: </p><h3 style="display:inline">{{ m.localidad}}</h3></br>
+			<p style="display:inline">Provincia: </p><h3 style="display:inline">{{ m.provincia}}</h3></br>
+			<p style="display:inline">Codigo postal: </p><h3 style="display:inline">{{ m.codigo_postal}}</h3></br>
+			<p style="display:inline">Barrio: </p><h3 style="display:inline">{{ m.barrio}}</h3></br>
+			<p style="display:inline">Distrito: </p><h3 style="display:inline">{{ m.distrito}}</h3></br>
+			<p style="display:inline">Tipo: </p><h3 style="display:inline">{{ m.tipo}}</h3></br>
+			<p style="display:inline">Telefono: </p><h3 style="display:inline">{{ m.telefono}}</h3></br>
+			<p style="display:inline">Email: </p><h3 style="display:inline">{{ m.email}}</h3></br>
+			<p style="display:inline">Fax: </p><h3 style="display:inline">{{ m.fax}}</h3></br>
 
 	<!--		<p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">enlace</a></p>
 	-->
@@ -50,13 +50,24 @@
 		<div>
 			</br>
 			<p><h2>Publique un comentario:</h2></p>
-			<form action="/museos/{{ museo.museo_id }}" method="POST">
+			<form action="/museos/{{ m.museo_id }}" method="POST">
 				{% csrf_token %}
 				<label for="comentario"></label><input name="comentario" type="text" />
 				<button type="submit">Comentar</button>
 			</form>
 		</div>
-
+		<p>-------------------------------------------------------------------------------</p>
+		<div>
+			<p><h2>Comentarios:</h2></p>
+			{% for comentario in comentarios_museo %}
+				<div class="comentario">
+					<p>Comentario de {{ comentario.autor }}:</p>
+					<p><h4>{{ comentario.texto |linebreaksbr }}</h4></p>
+				</div>
+			{% endfor %}
+			</div>
+			</br></br></br></br></br></br>
+		</div>
 	</body>
 </html>
 

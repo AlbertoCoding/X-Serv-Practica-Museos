@@ -33,13 +33,23 @@ def museos_list(request): #Para una alternativa /museos2
 
 def infoMuseo(request, id_museo): #Para el /museos/id
 	
-    museo = Museo.objects.get(museo_id=id_museo)
+    m = Museo.objects.get(museo_id=id_museo)
 
     if request.method == 'GET':
-        return render(request, 'museosMadrid/museo_info.html', {'museo': museo})
+      #  try:
+            comentarios_museo = Comentario.objects.all().filter(museo=m)# La idea es tener el conjunto de comentarios de un mismo museo
+          #  return render('TODO VA BIEN SEÑORES')
+       # except:
+            return render(request, 'museosMadrid/museo_info.html', {'m':m, 'comentarios_museo': comentarios_museo})
+
+
     elif request.method == 'POST':
-        comentario = request.POST.get('comentario', None)
-        return HttpResponse('<h3>Comentario publicado: </h3><p>' + comentario + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
+        texto_comentario_nuevo = request.POST.get('comentario', None)
+        autor_comentario_nuevo = "examen18"
+        comentario_nuevo = Comentario(autor=autor_comentario_nuevo, texto=texto_comentario_nuevo, museo=m)
+  #      comentario_nuevo.save()
+  #      comentario_nuevo.museo.add(m)
+        return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
 
 
 def about(request): #Para el /about
@@ -64,7 +74,8 @@ def register(request): #Para el /register
 
 
 
-
-
 def error(request): #Para el resto
     return HttpResponse('<h3>Page not found</h3>')
+
+
+
