@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Página de ejemplo</title>
+		<title>Register</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
@@ -14,14 +14,16 @@
 		</div>	
 
 		<div>
-			<h1>Listado de museos</h1>
+			<h1>Registrar un nuevo usuario</h1>
 		</div>
-
-		{% for museo in museos %}
 			<div class="museo">
-				<h3><a href="">{{ museo.nombre }}</a></h3>
-				<p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">enlace</a></p>
+          		<form action="http://127.0.0.1:8000/register" method"POST">
+        			<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
+     				<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
+      				<label for="id_email">Correo electronico: </label> <input id="id_email" name="email" type="text" /></br>
+        			<button type="submit">Registrar</button>
+        		</form>
 			</div>
-		{% endfor %}
 	</body>
 </html>
+

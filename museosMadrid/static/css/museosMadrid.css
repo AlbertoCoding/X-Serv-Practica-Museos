@@ -1,3 +1,5 @@
+
+
 h3 a {
 	color: #FCA205;
 	font-family: 'Lobster';
@@ -5,4 +7,8 @@ h3 a {
 
 body {
 	padding-left: 20px;
+}
+
+.museo {
+	margin-bottom: 70px;
 }

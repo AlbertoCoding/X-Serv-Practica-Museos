@@ -12,6 +12,7 @@ def home(request): #Para el /
     respuesta = '<h2>"Esto es la pagina de inicio (home)"</h2>'
     respuesta += 'Si quieres ver todos los museos: ' + '<a href="' + '/museos">' + 'Todos' + '</a>'
     respuesta += '</br></br>' + 'About de la web: ' + '<a href="' + '/about">' + 'About' + '</a></br>'
+    respuesta += 'Si no tienes usuario: ' + '<a href="/register">' + '¡REGISTRATE!' + '</a>'
     return HttpResponse(respuesta)
 
 
@@ -55,14 +56,8 @@ def about(request): #Para el /about
 def register(request): #Para el /register
 
     if request.method == 'GET':
-        respuesta = '<h2>Cree un nuevo usuario</h2></br>'
-        respuesta += '<form action="http://127.0.0.1:8000/register" method"POST">'
-        respuesta += '<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" />'
-        respuesta += '<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" />'
-        respuesta += '<label for="id_email">Correo electronico: </label> <input id="id_email" name="email" type="text" />'
-        respuesta += '<button type="submit">Registrar</button>'
-        respuesta += '</form>'
-        return HttpResponse(respuesta)
+
+        return render(request, 'museosMadrid/register.html', {})
 
     elif request.method == 'POST':
         username = request.POST.get('username', None) #Para evitar que haya users iguales
