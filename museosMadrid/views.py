@@ -52,6 +52,15 @@ def infoMuseo(request, id_museo): #Para el /museos/id
         return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
 
 
+def vote(request, id_museo):
+    m = Museo.objects.get(museo_id=id_museo)
+    m.puntuacion += 1
+    m.save()
+    return HttpResponseRedirect('/museos/' + str(id_museo))
+#    return HttpResponse('<h3>Has votado [+1] al museo ' + m.nombre + '</h3>'+
+#'<p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
+
+
 def about(request): #Para el /about
 	return render(request, 'museosMadrid/about.html', {})
 
