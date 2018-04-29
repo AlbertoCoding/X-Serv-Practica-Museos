@@ -89,5 +89,11 @@ def register(request): #Para el /register
 def error(request): #Para el resto
     return HttpResponse('<h3>Page not found</h3>')
 
+def prueba(request):
+	return render(request, 'museosMadrid/base.html', {})	
+
+
+
+
 
 

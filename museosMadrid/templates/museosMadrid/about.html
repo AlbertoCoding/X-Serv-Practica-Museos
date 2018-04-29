@@ -1,28 +1,16 @@
-{% load staticfiles %}
+	
 
-<html>
-	<head>
-		<title>App Museos Madrid (about)</title>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
-		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
-	</head>
-	<body>		
-		<div>
-    		<p>Volver al home: <a href="/">Inicio</a></p>
-		</div>	
+{% extends 'museosMadrid/base.html' %}
 
+	{% block content %}
 		<div>
 			<h1>About</h1>
 		</div>
-			<div class="about">
-					</br>
-					Autor de la página: <h4>Alberto Rafael Rodríguez Iglesias</h4>
-   					Titulación: <h4>Grado de Ingeniería en Tecnologías de la Telecomunicación en la Universidad Rey Juan Carlos (URJC)</h4>
-    				Madrid, España</br>
-				</p>
-			</div>
-	</body>
-</html>
-
+		<div class="about">
+				</br>
+				Autor de la página: <h4>Alberto Rafael Rodríguez Iglesias</h4>
+   				Titulación: <h4>Grado de Ingeniería en Tecnologías de la Telecomunicación en la Universidad Rey Juan Carlos (URJC)</h4>
+    			Madrid, España</br>
+			</p>
+		</div>
+	{% endblock %}
