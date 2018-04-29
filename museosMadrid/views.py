@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Museo, Usuario, Comentario
 from django.contrib.auth.models import User
+#from django import models
 
 # Create your views here.
 
@@ -73,13 +74,15 @@ def register(request): #Para el /register
 
     elif request.method == 'POST':
 		
-        username = request.POST.get('username', None) #Para evitar que haya users iguales
-        password = request.POST.get('password', None)
-        email = request.POST.get('email', None)
-        user = User.objects.create_user(username, email, password)
+        usernm = request.POST.get('username', None)
+        passwd = request.POST.get('password', None)
+        mail = request.POST.get('email', None)
+        userA = User.objects.create(username=usernm, email=mail, password=passwd)
+        userB = Usuario.objects.create(username=usernm, email=mail, password=passwd)
         #user.last_name = 'Lennon'
-        user.save()
-        return HttpResponse('<h3>Usuario creado</h3>')
+        #user.save()
+        return HttpResponse('<h3>Usuario creado</h3>'+
+'<p>Volver a la página de inicio: <a href="/">Inicio</a></p>')
 
 
 

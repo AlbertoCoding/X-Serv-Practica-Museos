@@ -18,6 +18,7 @@
 		</div>
 			<div class="museo">
           		<form action="/register" method="POST">
+					{% csrf_token %}
         			<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
      				<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
       				<label for="id_email">Correo electronico: </label> <input id="id_email" name="email" type="text" /></br>

@@ -57,14 +57,16 @@ class Comentario(models.Model):
 
 
 class Usuario(models.Model):
-    nombre = models.OneToOneField(User)
+    username = models.CharField(max_length=100, default="ejemplo")
+    password = models.CharField(max_length=50, default="ejemplo")
+    email = models.EmailField(max_length=100, default="ejemplo@ejemplo.com")
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
-    museos = models.ManyToManyField(Museo, blank=True)
-    color_fondo = models.CharField(max_length=15, blank=True)
+    museos = models.ManyToManyField(Museo, blank=True, null=True)
+    color_fondo = models.CharField(max_length=15, blank=True, null=True)
 
 
     def __str__(self):
-        return self.nombre
+        return self.username
 
 
 
