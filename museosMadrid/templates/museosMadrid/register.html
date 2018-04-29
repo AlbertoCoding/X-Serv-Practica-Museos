@@ -14,31 +14,44 @@
 				<link rel="stylesheet" href="{% static 'css/museosMadrid_register.css' %}">
 
 
-			<!------ This is for the login box (from: https://bootsnipp.com ) ---------->
+			<!-------------- This is for the login box (from: https://bootsnipp.com ) ---------------->
 			<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 			<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 			<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		 	<!-------------------------------------------------------------------------->
+		 	<!---------------------------------------------------------------------------------------->
 
 			</head>
-
 
 
 
     		<div class="container">
     		    <div class="card card-container">
     		        <p id="profile-name" class="profile-name-card">Cree un nuevo usuario:</p>
-    		        <form class="form-signin">
-    		            <span id="reauth-email" class="reauth-email"></span>
-    		            <input type="username" id="inputUsername" class="form-control" placeholder="Nombre de usuario" required autofocus>
-    		            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-    		            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+    		        <form class="form-signin" action="/register" method="POST">
+						{% csrf_token %}
+    		            <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Nombre de usuario" required autofocus/>
+    		            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required/>
+    		            <input name="email" type="text" id="inputEmail" class="form-control" placeholder="Email" required />
     		            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">¡Regístrate!</button>
     		        </form>
     		    </div>
     		</div>
 		
+		<div>
+			<h1>Registrar un nuevo usuario</h1>
+		</div>
+		<div class="museo">
+       		<form action="/register" method="POST">
+				{% csrf_token %}
+        		<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
+     			<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
+   				<label for="id_email">Correo electronico: </label> <input id="id_email" name="email" type="text" /></br>
+       			<button type="submit">Registrar</button>
+       		</form>
+		</div>
 
+
+		{% endblock %}
 
 
 
@@ -96,7 +109,5 @@
 		</div>
 -->
 
-
-	{% endblock %}
 
 

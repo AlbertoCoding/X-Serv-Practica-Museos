@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+
+
 def home(request): #Para el /
 
 	museos = Museo.objects.all()
@@ -28,6 +30,8 @@ def todosLosMuseos(request): #Para el /museos
         respuesta += '</br>'
 
     return HttpResponse(respuesta)
+
+
 
 def museos_list(request): #Para una alternativa /museos2
     museos = Museo.objects.all()
@@ -55,6 +59,12 @@ def infoMuseo(request, id_museo): #Para el /museos/id
         return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web del museo</a></p>')
 
 
+
+def usuario(request, username):
+    
+    return render(request, 'museosMadrid/usuario.html', {})
+
+
 def vote(request, id_museo):
     m = Museo.objects.get(museo_id=id_museo)
     m.puntuacion += 1
@@ -80,10 +90,13 @@ def register(request): #Para el /register
         usernm = request.POST.get('username', None)
         passwd = request.POST.get('password', None)
         mail = request.POST.get('email', None)
-        userA = User.objects.create(username=usernm, email=mail, password=passwd)
+        userA = User.objects.create_user(username=usernm, email=mail, password=passwd)
         userB = Usuario.objects.create(username=usernm, email=mail, password=passwd)
+        
+        #userC = UserForm.save()		
         #user.last_name = 'Lennon'
-        #user.save()
+        userA.save()
+        userB.save()
         return HttpResponse('<h3>Usuario creado</h3>'+
 '<p>Volver a la página de inicio: <a href="/">Inicio</a></p>')
 
@@ -94,7 +107,7 @@ def login_view(request): #Para el recurso /login
 
     if request.method == 'POST':
         usernm = request.POST.get('username', None)
-        passwd = request.POST.get('password', None) 
+        passwd = request.POST.get('password', None)
         user = authenticate(username=usernm, password=passwd)
         if user is not None:
             login(request, user)

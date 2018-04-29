@@ -10,9 +10,21 @@ body, html {
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }
 
+
+.nav, .page-menu, .collapse, .navbar {
+	background-color: #ffffff;
+}
+
+.col-sm-3 {
+	background-color: #ffffff;
+	color: #000000;
+    font-weight : bold;
+}
+
 .card-container.card {
     max-width: 350px;
     padding: 40px 40px;
+	margin-left: 190px;
 }
 
 .btn {

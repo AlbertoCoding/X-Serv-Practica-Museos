@@ -1,0 +1,21 @@
+
+
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to bottom, white, #c6d9ec);
+}
+
+
+
+.nav, .page-menu, .collapse, .navbar {
+	background-color: #b3e0ff;
+}
+
+.col-sm-3 {
+	background-color: #b3e0ff;
+	color: #000000;
+    font-weight : bold;
+}
+
+

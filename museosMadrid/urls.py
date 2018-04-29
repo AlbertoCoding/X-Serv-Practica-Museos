@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^museos/$', views.museos_list),
     url(r'^museos/(\d+)$', views.infoMuseo),
     url(r'^$', views.home),
+    url(r'^(?P<username>[\w.@+-]+)$', views.usuario),
     url(r'^', views.error)
 ]
