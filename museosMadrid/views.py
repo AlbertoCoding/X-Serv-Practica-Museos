@@ -4,11 +4,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Museo, Usuario, Comentario
 from django.contrib.auth.models import User
-#from django import models
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
 def home(request): #Para el /
+
+	museos = Museo.objects.all()
+
 	return render(request, 'museosMadrid/home.html', {})
 
 
@@ -37,12 +40,11 @@ def infoMuseo(request, id_museo): #Para el /museos/id
     m = Museo.objects.get(museo_id=id_museo)
 
     if request.method == 'GET':
-      #  try:
             comentarios_museo = Comentario.objects.all().filter(museo=m)# La idea es tener el conjunto de comentarios de un mismo museo
-          #  return render('TODO VA BIEN SEÑORES')
-       # except:
-            return render(request, 'museosMadrid/museo_info.html', {'m':m, 'comentarios_museo': comentarios_museo})
-
+            if request.user.is_authenticated():
+                return render(request, 'museosMadrid/museo_info.html', {'m':m, 'comentarios_museo': comentarios_museo})
+            else:
+                return HttpResponse('No estás autenticado')
 
     elif request.method == 'POST':
         texto_comentario_nuevo = request.POST.get('comentario', None)
@@ -50,7 +52,7 @@ def infoMuseo(request, id_museo): #Para el /museos/id
         comentario_nuevo = Comentario(autor=autor_comentario_nuevo, texto=texto_comentario_nuevo, museo=m)
         comentario_nuevo.save()
   #      comentario_nuevo.museo.add(m)
-        return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web museo</a></p>')
+        return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web del museo</a></p>')
 
 
 def vote(request, id_museo):
@@ -64,6 +66,7 @@ def vote(request, id_museo):
 
 def about(request): #Para el /about
 	return render(request, 'museosMadrid/about.html', {})
+
 
 
 def register(request): #Para el /register
@@ -86,8 +89,30 @@ def register(request): #Para el /register
 
 
 
+
+def login_view(request): #Para el recurso /login
+
+    if request.method == 'POST':
+        usernm = request.POST.get('username', None)
+        passwd = request.POST.get('password', None) 
+        user = authenticate(username=usernm, password=passwd)
+        if user is not None:
+            login(request, user)
+            return HttpResponse(usernm + ': You successfully logged in'+'</br><p>Volver a la pagina de inicio: <a href="/">Inicio</a></p>')
+        else:
+            return HttpResponse("You couldn't login")
+
+
+def logout_view(request):
+
+    logout(request)
+    return HttpResponse('You have successfully logged out')
+
+
 def error(request): #Para el resto
     return HttpResponse('<h3>Page not found</h3>')
+
+
 
 def prueba(request):
 	return render(request, 'museosMadrid/base.html', {})	

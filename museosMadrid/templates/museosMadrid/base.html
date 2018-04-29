@@ -8,8 +8,17 @@
 		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
 		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
 	</head>
-	<body>		
-		<div class="page-header">
+	<body>
+
+		<div class="login-box">
+  	 		<form action="/login" method="POST">
+				{% csrf_token %}
+       			<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
+   				<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
+        		<button type="submit">Login</button>
+        	</form>
+		</div>
+		<div class="page-menu">
 			<p>Volver a la página de inicio: <a href="/">Inicio</a></p>
    			<p>Si quieres ver todos los museos: <a href="/museos">Todos</a></p>
    			<p>Si no tienes usuario: <a href="/register">¡REGISTRATE!</a></p>

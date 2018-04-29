@@ -64,7 +64,9 @@
 			<p><h2>Comentarios:</h2></p>
 			{% for comentario in comentarios_museo %}
 				<div class="comentario">
-					<p>Comentario de {{ comentario.autor }}:</p>
+					<!--<p>Comentario de {{ comentario.autor }}:</p>
+					-->
+					<p>[*]Anónimo dijo:</p>
 					<p><h4>{{ comentario.texto |linebreaksbr }}</h4></p>
 				</div>
 			{% endfor %}
