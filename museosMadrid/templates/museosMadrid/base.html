@@ -5,8 +5,9 @@
 		<title>App Museos Madrid (info museo)</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{% static 'css/museosMadrid.css' %}">
+		<link rel="stylesheet" href="{% static 'css/museosMadrid_base.css' %}">
 		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
 	</head>
 	<body>
 
@@ -24,6 +25,10 @@
 				{% csrf_token %}
 				<button type="submit">Logout</button>
 			</form>
+		</div>
+
+		<div class="log-comment">
+			<p>Estás loggeado como: {{ request.user.username }}</p>
 		</div>
 
 		<div id="navbar" class="navbar-collapse collapse">
@@ -84,24 +89,8 @@
 							</ul>
 						</div>
 
-					<!--I used: https://www.embedgooglemap.net
-					<div class="mapouter">
-						<div class="gmap_canvas">
-							<iframe width="810" height="199" id="map-container" frameborder="0" style="border:0"
-								src="https://maps.google.com/maps/q=madrid&t=k&z=15&ie=UTF8&iwloc=&output=embed" scrolling="no" marginheight="0" marginwidth="0">
-							</iframe><a href="/museos">Museos Madrid</a>
-							<style>
-								.mapouter{overflow:hidden;height:199px;width:810px;}.gmap_canvas{background:none!important;height:199px;width810px;}
-							</style>
-						</div>
-					</div>
-					-->
-
 					<a style="margin-left: 30px;" href="#">LoremIpsum</a>
 			</footer>
-		</div>		
-<!--		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
--->
+---------->		</div>		
 	</body>
 </html>
