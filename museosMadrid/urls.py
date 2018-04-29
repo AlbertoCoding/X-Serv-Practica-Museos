@@ -10,7 +10,8 @@ urlpatterns = [
   #  url(r'^usuario$', views. ),
   #  url(r'^usuario/', views.) #Para el /usuario/xml
   #  url(r'^museos$', views.todosLosMuseos),
-    url(r'^login$', views.login_view),	
+    url(r'^login', views.login_view),
+    url(r'^logout', views.logout_view),
     url(r'^museos$', views.museos_list),
     url(r'^museos/$', views.museos_list),
     url(r'^museos/(\d+)$', views.infoMuseo),

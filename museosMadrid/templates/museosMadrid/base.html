@@ -18,11 +18,23 @@
         		<button type="submit">Login</button>
         	</form>
 		</div>
-		<div class="page-menu">
-			<p>Volver a la página de inicio: <a href="/">Inicio</a></p>
-   			<p>Si quieres ver todos los museos: <a href="/museos">Todos</a></p>
-   			<p>Si no tienes usuario: <a href="/register">¡REGISTRATE!</a></p>
 		<div>
+			<form action="/logout" method="POST">
+				{% csrf_token %}
+				<button type="submit">Logout</button>
+			</form>
+		</div>
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<div class="page-menu">
+				<ul class="nav navbar-nav navbar">
+					<li><a href="/">Inicio</a></li>
+   					<li><a href="/museos">Todos</a></li>
+   					<li><a href="/register">¡REGISTRATE!</a></li>
+				</ul>
+			<div>
+		</div>
+
 		<div class="content container">
 			<div class="row">
 				<div class="col-md-8">
