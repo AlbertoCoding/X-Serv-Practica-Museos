@@ -6,6 +6,18 @@ from .models import Museo, Usuario, Comentario
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+#Para el parseador de XML
+from xml.sax.handler import ContentHandler
+from xml.sax import make_parser
+import sys
+import string
+
+import urllib2
+
+#Parser XML bueno
+import urllib
+from museosMadrid.parser import parser_xml
+
 # Create your views here.
 
 
@@ -48,7 +60,8 @@ def infoMuseo(request, id_museo): #Para el /museos/id
             if request.user.is_authenticated():
                 return render(request, 'museosMadrid/museo_info.html', {'m':m, 'comentarios_museo': comentarios_museo})
             else:
-                return HttpResponse('No estás autenticado')
+                return HttpResponse('No estás loggeado con ningún usuario')
+   #             return HttpResponseRedirect('/register')
 
     elif request.method == 'POST':
         texto_comentario_nuevo = request.POST.get('comentario', None)
@@ -125,6 +138,72 @@ def logout_view(request):
 def error(request): #Para el resto
     return HttpResponse('<h3>Page not found</h3>')
 
+
+
+
+def parser_xml_basededatos2(request):
+
+    respuesta = ""
+
+    def normalize_whitespace(text):
+        "Remove redundant whitespace from a string"
+        return string.join(string.split(text), ' ')
+
+    class CounterHandler(ContentHandler):
+
+        def __init__ (self):
+            self.inContent = 0
+            self.theContent = ""
+
+        def startElement (self, name, attrs):
+            if name == 'atributos':
+                respuesta += "###### INFO DE UN MUSEO ******"
+            elif name == 'atributo':
+                self.nombre = normalize_whitespace(attrs.get('nombre'))
+                respuesta += " nombre: " + self.nombre
+                self.inContent = 1
+            
+        def endElement (self, name):
+            if self.inContent:
+                self.theContent = normalize_whitespace(self.theContent)
+            if name == 'atributo':
+                if self.theContent != "":
+                    respuesta += " :: " + self.theContent
+            if self.inContent:
+                self.inContent = 0
+                self.theContent = ""
+        
+        def characters (self, chars):
+            if self.inContent:
+                self.theContent = self.theContent + chars
+            
+        # --- Main prog
+        # Load parser and driver
+
+    MuseoParser = make_parser()
+    MuseoHandler = CounterHandler()
+    MuseoParser.setContentHandler(MuseoHandler)
+
+        # Ready, set, go!
+
+    file = urllib2.urlopen('https://raw.githubusercontent.com/CursosWeb/CursosWeb.github.io/master/etc/201132-0-museos.xml')
+    xmlFile = file.read()
+    file.close()
+ #   xmlFile = open('museosMadrid.xml')
+   # MuseoParser.parse(xmlFile)
+    
+   # for row in xmlFile:
+    #    respuesta += '##' + row + '</br>'
+
+   
+    return HttpResponse(respuesta)
+
+
+def parser_xml_basededatos(request):
+    url = "https://raw.githubusercontent.com/CursosWeb/CursosWeb.github.io/master/etc/201132-0-museos.xml"
+    xml = urllib2.urlopen(url) 
+    parser_xml(xml)
+    return HttpResponseRedirect("/")
 
 
 def prueba(request):

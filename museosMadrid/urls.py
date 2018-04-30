@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^register$', views.register),
     url(r'^museos/(\d+)/vote$', views.vote),
     url(r'^prueba', views.prueba),
+    url(r'^datos$', views.parser_xml_basededatos),
   #  url(r'^usuario$', views. ),
   #  url(r'^usuario/', views.) #Para el /usuario/xml
   #  url(r'^museos$', views.todosLosMuseos),

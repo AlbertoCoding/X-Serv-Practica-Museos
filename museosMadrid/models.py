@@ -38,6 +38,7 @@ class Museo(models.Model):
     fax = models.PositiveIntegerField(blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
 
+    n_comentarios = models.PositiveSmallIntegerField(default=0)
     puntuacion = models.PositiveSmallIntegerField(default=0)
 
     def  __str__(self):
