@@ -22,7 +22,7 @@ class Museo(models.Model):
     nombre_via = models.CharField(max_length=100, blank=True, null=True)
     clase_via = models.CharField(max_length=20, blank=True, null=True)
     tipo_num = models.CharField(max_length=5, blank=True, null=True)
-    num = models.PositiveSmallIntegerField(blank=True, null=True)
+    num = models.CharField(max_length=8, blank=True, null=True)
     localidad = models.CharField(max_length=50, blank=True, null=True)
     provincia = models.CharField(max_length=30, blank=True, null=True)
     codigo_postal = models.PositiveIntegerField(blank=True, null=True)
@@ -33,9 +33,9 @@ class Museo(models.Model):
     latitud = models.DecimalField(max_digits=23, decimal_places=20, blank=True, null=True)
     longitud = models.DecimalField(max_digits=23, decimal_places=20, blank=True, null=True)
 #   datos_contactos =
-    telefono = models.PositiveIntegerField(blank=True, null=True)
+    telefono = models.CharField(max_length=40, blank=True, null=True)
     email = models.CharField(max_length=80, blank=True, null=True)
-    fax = models.PositiveIntegerField(blank=True, null=True)
+    fax = models.CharField(max_length=40, blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
 
     n_comentarios = models.PositiveSmallIntegerField(default=0)
