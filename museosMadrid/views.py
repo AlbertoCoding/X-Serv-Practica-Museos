@@ -46,8 +46,16 @@ def todosLosMuseos(request): #Para el /museos
 
 
 def museos_list(request): #Para una alternativa /museos2
-    museos = Museo.objects.all()
+ 
+    if request.method == 'GET':
+        museos = Museo.objects.all()
+
+    elif request.method == 'POST':
+        distritoaux = request.POST.get('distrito-filter', None)
+        museos = Museo.objects.all().filter(distrito=distritoaux)
+
     return render(request, 'museosMadrid/museos_list.html', {'museos': museos})
+
 
 
 

@@ -15,6 +15,8 @@ def parser_xml(xml):
                 elif atributo.get('nombre') == "NOMBRE":
                     nombre2 = atributo.text
                     museo.nombre = nombre2
+#                 elif atributo.get('nombre') in datos:
+#                     tmp = atributo.text
                 elif atributo.get('nombre') == "DESCRIPCION-ENTIDAD":
                     descripcion2 = atributo.text
                     museo.descripcion = descripcion2
