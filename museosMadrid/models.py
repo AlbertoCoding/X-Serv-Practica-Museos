@@ -18,7 +18,6 @@ class Museo(models.Model):
     transporte = models.TextField(blank=True, null=True)
     accesibilidad = models.BooleanField(blank=True)
     url = models.CharField(max_length=300, blank=True, null=True)
-#   localizacion = 
     nombre_via = models.CharField(max_length=100, blank=True, null=True)
     clase_via = models.CharField(max_length=20, blank=True, null=True)
     tipo_num = models.CharField(max_length=5, blank=True, null=True)
@@ -32,11 +31,11 @@ class Museo(models.Model):
     coordenada_y = models.IntegerField(blank=True, null=True)
     latitud = models.DecimalField(max_digits=23, decimal_places=20, blank=True, null=True)
     longitud = models.DecimalField(max_digits=23, decimal_places=20, blank=True, null=True)
-#   datos_contactos =
     telefono = models.CharField(max_length=40, blank=True, null=True)
     email = models.CharField(max_length=80, blank=True, null=True)
     fax = models.CharField(max_length=40, blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
+	mostrar = models.PositiveSmallIntegerField(default=1)
 
     n_comentarios = models.PositiveSmallIntegerField(default=0)
     puntuacion = models.PositiveSmallIntegerField(default=0)
