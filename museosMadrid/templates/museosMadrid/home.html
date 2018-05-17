@@ -1,19 +1,105 @@
 
 
+{% load staticfiles %}
 
-{% extends 'museosMadrid/base.html' %}
+<html>
+	<head>
+		<title>App Museos Madrid (info museo)</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/museosMadrid_base.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Lobster$subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-		{% block content %}
-			<div>
-				<h1>APP MUSEOS MADRID</h1>
+	</head>
+	<body>
+
+		<div class="login-box">
+  	 		<form action="/login" method="POST">
+				{% csrf_token %}
+       			<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
+   				<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
+        		<button type="submit">Login</button>
+        	</form>
+		</div>
+
+		<div class="logout-box">
+			<form action="/logout" method="POST">
+				{% csrf_token %}
+				<button type="submit">Logout</button>
+			</form>
+		</div>
+
+		<div class="log-comment">
+			<p>Estás loggeado como: {{ request.user.username }}</p>
+		</div>
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<div class="page-menu">
+				<ul class="nav navbar-nav navbar">
+   					<li><a href="/museos">Todos</a></li>
+					<li><a href="/{{ request.user.username }}">Página personal</a></li>
+					<li><a href="/about">About</a></li>
+   					<li><a href="/register">¡REGISTRATE!</a></li>
+				</ul>
 			</div>
+		</div>
 
-			<div>
-				<form action="/datos" method="GET">
-					<button class="btn-cargar-museos" type="submit">Cargar Museos</button>
-				</form>
+		<div class="content container">
+			<div class="row">
+				<div class="col-md-8">
+					<div>
+						<h1>APP MUSEOS MADRID</h1>
+					</div>
+
+					<div>
+						<form action="/datos" method="GET">
+							<button class="btn-cargar-museos" type="submit">Cargar Museos</button>
+						</form>
+					</div>
+				</div>
 			</div>
+		</div>
+		</br>
 
-		{% endblock %}
+	<!--Footer--> <!--From: http://demo.tutorialzine.com-->
+		<div id="footer-div">
+			<footer id="myFooter">
+						<div class="col-sm-3">
+							<h5>Get started</h5>
+							<ul>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+							</ul>
+						</div>
+						<div class="col-sm-3">
+							<h5>About us</h5>
+							<ul>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+							</ul>
+						</div>
+						<div class="col-sm-3">
+							<h5>Support</h5>
+							<ul>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+							</ul>
+						</div>
+						<div class="col-sm-3">
+							<h5>Legal</h5>
+							<ul>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">LoremIpsum</a></li>
+							</ul>
+						</div>
 
+					<a style="margin-left: 30px;" href="#">LoremIpsum</a>
+			</footer>
+		</div>		
+	</body>
+</html>
 
