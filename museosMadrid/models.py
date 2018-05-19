@@ -66,7 +66,7 @@ class Usuario(models.Model):
 
 
     def __str__(self):
-        return self.username
+        return "Username: " + self.username + "Museos: " + unicode(self.museos)
 
 
 

@@ -24,11 +24,11 @@ from museosMadrid.parser import parser_xml
 
 def home(request): #Para el /
 
-	museos = Museo.objects.all()
+    museos = Museo.objects.all()
 
     museos_para_mostrar = museos.filter(mostrar=1)
 
-	return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar})
+    return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar})
 
 
 
@@ -114,7 +114,7 @@ def register(request): #Para el /register
         passwd = request.POST.get('password', None)
         mail = request.POST.get('email', None)
         userA = User.objects.create_user(username=usernm, email=mail, password=passwd)
-        userB = Usuario.objects.create(username=usernm, email=mail, password=passwd)
+        userB = Usuario(username=usernm, email=mail, password=passwd)
         
         #userC = UserForm.save()		
         #user.last_name = 'Lennon'
@@ -134,7 +134,7 @@ def login_view(request): #Para el recurso /login
         user = authenticate(username=usernm, password=passwd)
         if user is not None:
             login(request, user)
-            return HttpResponse(usernm + ': You successfully logged in'+'</br><p>Volver a la pagina de inicio: <a href="/">Inicio</a></p>')
+            return HttpResponse(usernm + ': You have successfully logged in'+'</br><p>Volver a la pagina de inicio: <a href="/">Inicio</a></p>')
         else:
             return HttpResponse("You couldn't login")
 
@@ -142,7 +142,7 @@ def login_view(request): #Para el recurso /login
 def logout_view(request):
 
     logout(request)
-    return HttpResponse('You have successfully logged out')
+    return HttpResponse('You have successfully logged out'+'</br><p>Volver a la pagina de inicio: <a href="/">Inicio</a></p>')
 
 
 def error(request): #Para el resto
@@ -228,7 +228,22 @@ def parser_xml_basededatos(request):
     parser_xml(xml)
     return HttpResponseRedirect("/")
 
+
+
 def boton_like(request):
+    
+    if request.method == 'POST':
+        idmuseo = int(request.POST.get('idmuseo', None))
+        m = Museo.objects.get(museo_id=idmuseo)
+        usuario = Usuario.objects.get(username=request.user.username)
+        usuario.museos.add(m)
+        usuario.save()
+
+        return HttpResponseRedirect("/" + str(usuario.username))
+
+    else:
+        return HttpResponse('<h1>ERROR</h1>')
+
 
 def prueba(request):
 	return render(request, 'museosMadrid/base.html', {})	

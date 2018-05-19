@@ -40,12 +40,21 @@
 	-->
 		</div>
 		<p>-------------------------------------------------------------------------------</p>
+
+		<div>
+			<form action="/boton_like" method="POST">
+				{% csrf_token %}
+				<input name="idmuseo" id="idmuseo" value= "{{ m.museo_id }}">
+				<button class="btn-like" type="submit">¡Añadir a mi lista!</button>
+			</form>
+		</div>				
+
 		<div>
 			</br>
 			<p><h2>Publique un comentario:</h2></p>
 			<form action="/museos/{{ m.museo_id }}" method="POST">
 				{% csrf_token %}
-				<label for="comentario"></label><input name="comentario" type="text" />
+				<label for="comentario"></label><input name="comentario" type="text">
 				<button type="submit">Comentar</button>
 			</form>
 		</div>

@@ -1,0 +1,52 @@
+    
+
+
+{% extends 'museosMadrid/base.html' %}
+
+	{% block content %}
+
+		<div>
+			<h4 style="display:inline">Puntuación del museo según votos de los usuarios: </h4>
+			<h2 style="display:inline"> {{ m.puntuacion }}</h2>
+			<form action="/museos/{{ m.museo_id }}/vote"><button type="submit">¡Vota [+1]!</button></form>
+		</div>
+		<p>-------------------------------------------------------------------------------</p>
+		<div>
+			<h1>Información del museo</h1>
+		</div>
+		<div>
+            <ul>
+			<li><p style="display:inline"><p style="display:inline">Museo ID: </p>{{ m.museo_id }}</p></li>
+			<li><p style="display:inline"><p style="display:inline">Nombre: </p>{{ m.nombre }}</p></li>
+			<li><p style="display:inline">Descripción: </p><p style="display:inline">{{ m.descripcion }}</p></li>
+			<li><p style="display:inline">Horario: </p><p style="display:inline">{{ m.horario}}</p></li>
+			<li><p style="display:inline">Transporte: </p><p style="display:inline">{{ mtransporte}}</p></li>
+			<li><p style="display:inline">Accesibilidad: </p><p style="display:inline">{{ m.accesibilidad}}</p></li>
+			<li><p style="display:inline">URL: </p><p style="display:inline">{{ m.url}}</p></li>
+			<li><p style="display:inline">Nombre Via: </p><p style="display:inline">{{ m.nombre_via}}</p></li>
+			<li><p style="display:inline">Clase Vial: </p><p style="display:inline">{{ m.clase_vial}}</p></li>
+			<li><p style="display:inline">Tipo Num: </p><p style="display:inline">{{ m.tipo_num}}</p></li>
+			<li><p style="display:inline">Localidad: </p><p style="display:inline">{{ m.localidad}}</p></li>
+			<li><p style="display:inline">Provincia: </p><p style="display:inline">{{ m.provincia}}</p></li>
+			<li><p style="display:inline">Codigo postal: </p><p style="display:inline">{{ m.codigo_postal}}</ph3></li>
+			<li><p style="display:inline">Barrio: </p><p style="display:inline">{{ m.barrio}}</p></li>
+			<li><p style="display:inline">Distrito: </p><p style="display:inline">{{ m.distrito}}</p></li>
+			<li><p style="display:inline">Tipo: </p><p style="display:inline">{{ m.tipo}}</p></li>
+			<li><p style="display:inline">Telefono: </p><p style="display:inline">{{ m.telefono}}</p></li>
+			<li><p style="display:inline">Email: </p><p style="display:inline">{{ m.email}}</p></li>
+			<li><p style="display:inline">Fax: </p><p style="display:inline">{{ m.fax}}</p></li>
+            </ul>
+	<!--		<p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">enlace</a></p>
+	-->
+		</div>
+			</br></br></br></br></br></br>
+
+
+	{% endblock %}
+
+
+
+
+
+
+
