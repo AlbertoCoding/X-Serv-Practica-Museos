@@ -26,7 +26,9 @@ def home(request): #Para el /
 
 	museos = Museo.objects.all()
 
-	return render(request, 'museosMadrid/home.html', {})
+    museos_para_mostrar = museos.filter(mostrar=1)
+
+	return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar})
 
 
 
@@ -54,7 +56,9 @@ def museos_list(request): #Para una alternativa /museos2
         distritoaux = request.POST.get('distrito-filter', None)
         museos = Museo.objects.all().filter(distrito=distritoaux)
 
-    return render(request, 'museosMadrid/museos_list.html', {'museos': museos})
+    museos_para_mostrar = museos.filter(mostrar=1)
+
+    return render(request, 'museosMadrid/museos_list.html', {'museos': museos_para_mostrar})
 
 
 
@@ -66,17 +70,15 @@ def infoMuseo(request, id_museo): #Para el /museos/id
     if request.method == 'GET':
             comentarios_museo = Comentario.objects.all().filter(museo=m)# La idea es tener el conjunto de comentarios de un mismo museo
             if request.user.is_authenticated():
-                return render(request, 'museosMadrid/museo_info.html', {'m':m, 'comentarios_museo': comentarios_museo})
+                return render(request, 'museosMadrid/museo_info_logged.html', {'m':m, 'comentarios_museo': comentarios_museo})
             else:
-                return HttpResponse('No estás loggeado con ningún usuario')
-   #             return HttpResponseRedirect('/register')
+                return render(request, 'museosMadrid/museo_info_notlogged.html', {'m':m})
 
     elif request.method == 'POST':
         texto_comentario_nuevo = request.POST.get('comentario', None)
         autor_comentario_nuevo = "examen18"
         comentario_nuevo = Comentario(autor=autor_comentario_nuevo, texto=texto_comentario_nuevo, museo=m)
         comentario_nuevo.save()
-  #      comentario_nuevo.museo.add(m)
         return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web del museo</a></p>')
 
 
@@ -147,6 +149,19 @@ def error(request): #Para el resto
     return HttpResponse('<h3>Page not found</h3>')
 
 
+def mostrar(request):
+
+    museos = Museo.objects.all()
+    for museo in museos:
+
+        if museo.mostrar == 1 and museo.accesibilidad == 0:
+            museo.mostrar = 0
+        elif museo.mostrar == 0 and museo.accesibilidad == 0:
+            museo.mostrar = 1
+
+        museo.save()
+
+    return HttpResponseRedirect('/')
 
 
 def parser_xml_basededatos2(request):
@@ -213,6 +228,7 @@ def parser_xml_basededatos(request):
     parser_xml(xml)
     return HttpResponseRedirect("/")
 
+def boton_like(request):
 
 def prueba(request):
 	return render(request, 'museosMadrid/base.html', {})	

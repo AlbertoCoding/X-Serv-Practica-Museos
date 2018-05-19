@@ -65,7 +65,19 @@
 
 				</div>
 			</div>
+
+			<div>
+		    	{% for museo in museos %}
+				    <div class="museo">
+					    <h3>{{ museo.nombre }}</h3>
+					    <p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">Mas informacion</a></p>
+					    <p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">Mas informacion</a></p>
+	    			</div>
+		    	{% endfor %}
+			</div>
+
 		</div>
+
 		</br>
 
 	<!--Footer--> <!--From: http://demo.tutorialzine.com-->

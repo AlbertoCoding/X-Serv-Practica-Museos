@@ -16,7 +16,7 @@ class Museo(models.Model):
     horario = models.TextField(blank=True, null=True)
     equipamiento = models.TextField(blank=True, null=True)
     transporte = models.TextField(blank=True, null=True)
-    accesibilidad = models.BooleanField(blank=True)
+    accesibilidad = models.PositiveSmallIntegerField(blank=True)
     url = models.CharField(max_length=300, blank=True, null=True)
     nombre_via = models.CharField(max_length=100, blank=True, null=True)
     clase_via = models.CharField(max_length=20, blank=True, null=True)
@@ -35,7 +35,7 @@ class Museo(models.Model):
     email = models.CharField(max_length=80, blank=True, null=True)
     fax = models.CharField(max_length=40, blank=True, null=True)
     tipo = models.CharField(max_length=100, blank=True, null=True)
-	mostrar = models.PositiveSmallIntegerField(default=1)
+    mostrar = models.PositiveSmallIntegerField(default=1)
 
     n_comentarios = models.PositiveSmallIntegerField(default=0)
     puntuacion = models.PositiveSmallIntegerField(default=0)
