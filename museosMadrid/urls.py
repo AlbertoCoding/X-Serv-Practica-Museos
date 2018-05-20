@@ -9,7 +9,8 @@ urlpatterns = [
     url(r'^prueba', views.prueba),
     url(r'^datos$', views.parser_xml_basededatos),
     url(r'^accesibilidad$', views.mostrar),
-    url(r'^boton_like', views.boton_like),
+    url(r'^boton_like$', views.boton_like),
+    url(r'^usuario2$', views.usuario2),
   #  url(r'^usuario$', views. ),
   #  url(r'^usuario/', views.) #Para el /usuario/xml
   #  url(r'^museos$', views.todosLosMuseos),

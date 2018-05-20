@@ -62,7 +62,9 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=100, default="ejemplo@ejemplo.com")
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
     museos = models.ManyToManyField(Museo, blank=True, null=True)
+    titulo = models.CharField(max_length=300, default="Pagina del usuario")
     color_fondo = models.CharField(max_length=15, blank=True, null=True)
+    count = models.PositiveSmallIntegerField(default=0)
 
 
     def __str__(self):

@@ -27,7 +27,7 @@ body {
     padding-top: 20px;
 }
 
-.sidenav a {
+.sidenav p {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 30px;
@@ -84,10 +84,15 @@ body {
 		</div>
 
 		<div class="sidenav">
-	  		<a href="#about">About</a>
-  			<a href="#services">Services</a>
-  			<a href="#clients">Clients</a>
-  			<a href="#contact">Contact</a>
+
+			<p><h2><b>[+] Listas de museos de otros usuarios:</b></h2></p>
+
+		    {% for usuario in usuarios %}
+			    <div class="listas-usuarios">
+				    <p><a href="/{{ usuario.username }}">{{ usuario.titulo }} ({{ usuario.username }})</a></p>
+	    		</div>
+		    {% endfor %}
+
 		</div>
 
 		<div class="content container">

@@ -21,14 +21,38 @@ from museosMadrid.parser import parser_xml
 # Create your views here.
 
 
+def pos_num_menor(lista):
+
+    menor = lista[0]
+    pos_menor = 0
+
+    for e in [0, 1, 2, 3, 4]:
+            if lista[e] < menor:
+                menor = lista[e]
+                pos_menor = e
+    return pos_menor
+
+
 
 def home(request): #Para el /
 
     museos = Museo.objects.all()
+    museos = museos.filter(mostrar=1)
+    usuarios = Usuario.objects.all()
 
-    museos_para_mostrar = museos.filter(mostrar=1)
+    museos_para_mostrar = []
 
-    return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar})
+    if len(museos_para_mostrar) < 5:
+        for museo in museos:
+            if museo.n_comentarios != 0 and len(museos_para_mostrar) < 5:
+                museos_para_mostrar.append(museo)
+    if len(museos_para_mostrar) == 5:
+        for museo in museos:
+            if museo.n_comentarios > museos_para_mostrar[0].n_comentarios or museo.n_comentarios > museos_para_mostrar[1].n_comentarios or museo.n_comentarios > museos_para_mostrar[2].n_comentarios or museo.n_comentarios > museos_para_mostrar[3].n_comentarios or museo.n_comentarios > museos_para_mostrar[4].n_comentarios:
+                museos_para_mostrar[pos_num_menor(museos_para_mostrar)] = museo
+
+
+    return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar, 'usuarios': usuarios})
 
 
 
@@ -76,16 +100,46 @@ def infoMuseo(request, id_museo): #Para el /museos/id
 
     elif request.method == 'POST':
         texto_comentario_nuevo = request.POST.get('comentario', None)
-        autor_comentario_nuevo = "examen18"
+        autor_comentario_nuevo = request.user.username
         comentario_nuevo = Comentario(autor=autor_comentario_nuevo, texto=texto_comentario_nuevo, museo=m)
         comentario_nuevo.save()
+        m.n_comentarios = m.n_comentarios + 1
+        m.save()
+
         return HttpResponse('<h3>Comentario publicado: </h3><p>' + texto_comentario_nuevo + '</p><p><a href="/museos/' + id_museo + '">Regresar a la web del museo</a></p>')
+
+
+def usuario2(request):
+
+    if request.method == 'POST':
+        usuario = Usuario.objects.get(username=request.user.username)
+        if len(Museo.objects.filter(usuario = usuario))-5 < usuario.count:
+            usuario.count = 0
+        else:
+            usuario.count = usuario.count + 5
+        usuario.save()
+
+    return HttpResponseRedirect("/" + str(usuario.username))
 
 
 
 def usuario(request, username):
     
-    return render(request, 'museosMadrid/usuario.html', {})
+    uname = username
+    usuario = Usuario.objects.get(username=uname)
+
+    museos_para_mostrar = Museo.objects.filter(usuario = usuario)
+
+    if request.method == 'GET':
+        return render(request, 'museosMadrid/usuario.html', {'username': uname, 'usuario': usuario, 'museos': museos_para_mostrar[usuario.count:usuario.count+5]})
+
+    elif request.method == 'POST':
+        title = request.POST.get('titulo', None)
+        usuario.titulo = title
+        usuario.save()
+        
+        return HttpResponseRedirect("/" + str(uname))
+
 
 
 def vote(request, id_museo):
@@ -114,7 +168,7 @@ def register(request): #Para el /register
         passwd = request.POST.get('password', None)
         mail = request.POST.get('email', None)
         userA = User.objects.create_user(username=usernm, email=mail, password=passwd)
-        userB = Usuario(username=usernm, email=mail, password=passwd)
+        userB = Usuario(username=usernm, email=mail, password=passwd, titulo="Pagina de "+usernm)
         
         #userC = UserForm.save()		
         #user.last_name = 'Lennon'

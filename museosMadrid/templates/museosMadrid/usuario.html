@@ -5,8 +5,31 @@
 
 		{% block content %}
 			<div>
-				<h1>Web personal de {{ request.user }}</h1>
+				<h1>{{ usuario.titulo }} ({{ username }})</h1>
 			</div>
+			</br>
+			<div>
+				<p><h4>De un título a su página personal</h4></p>
+				<form action="/{{ username }}" method="POST">
+					{% csrf_token %}
+					<label for="titulo"></label><input name="titulo" type="text">
+					<button type="submit">Poner título</button>
+				</form>
+			</div>
+
+			<p><h3><b>[+] Museos favoritos de {{ username }}: </b><h3></p>
+		    {% for museo in museos %}
+			    <div class="museo">
+				    <h3><li>{{ museo.nombre }}</li></h3>
+				    <p><a href="/museos/{{ museo.museo_id |linebreaksbr }}">enlace</a></p>
+	    		</div>
+		    {% endfor %}
+
+				<form action="/usuario2" method="POST">
+					{% csrf_token %}
+					<input type="submit" value="Ver más">
+				</form>
+
 		{% endblock %}
 
 
