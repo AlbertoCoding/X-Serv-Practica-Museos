@@ -11,7 +11,7 @@
  <p>- Uso de Bootstrap para el desarrollo de los templates</p>
 
 <p>[+] URL del vídeo demostración de la funcionalidad básica:</p>
-<p><a href="https://youtu.be/0B54_wJTcxl"> Parte obligatoria </a></p>
+<p><a href="https://youtu.be/0B54_wJTcxI"> Parte obligatoria </a></p>
 </br>
 <p>[+] URL del vídeo demostración de la funcionalidad optativa:</p>
 <p><a href="https://youtu.be/UyfRwCcRayQ"> Parte opcional</a></p>
