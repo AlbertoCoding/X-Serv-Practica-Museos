@@ -1,15 +1,14 @@
 
-
 body, html {
     height: 100%;
     background-repeat: no-repeat;
     background-image: linear-gradient(to bottom, white, #c6d9ec);
 }
 
-
-
-.nav, .page-menu, .collapse, .navbar {
+.menu1 .nav, .page-menu, .collapse, .navbar {
+	font-size: large;
 	background-color: #b3e0ff;
+
 }
 
 .col-sm-3 {
@@ -17,5 +16,4 @@ body, html {
 	color: #000000;
     font-weight : bold;
 }
-
 

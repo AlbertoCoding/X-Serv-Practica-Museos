@@ -151,10 +151,22 @@ def usuario(request, username):
 
     elif request.method == 'POST':
         title = request.POST.get('titulo', None)
+    
         usuario.titulo = title
         usuario.save()
         
         return HttpResponseRedirect("/" + str(uname))
+
+
+def colores(request):
+
+    if request.method == 'POST':
+        bgcolor = 2
+        tletras = 2
+        cletras = 2
+
+        return HttpResponseRedirect("/" + str(request.user.username), {'bgcolor': bgcolor, 'tletras': tletras , 'cletras': cletras})
+
 
 
 
@@ -320,6 +332,27 @@ def prueba(request):
 
 
 
+def crear_xml(request, username):
+
+    uname = username
+    usuario = Usuario.objects.get(username=uname)
+
+    museos_para_mostrar = Museo.objects.filter(usuario = usuario)
+
+    respuesta = ""
+    respuesta += "<descripcion>Datos de los museos favoritos del usuario " + username + "</descripcion>"
+    
+    for m in museos_para_mostrar:
+        respuesta += "</br>"
+        respuesta += "<id>"+str(m.museo_id)+"</id></br>"
+        respuesta += "<nombre>"+m.nombre+"</nombre></br>"
+        respuesta += "<descripcion-entidad>"+m.descripcion+"</descripcion-entidad></br>"
+        respuesta += "<horario>"+m.horario+"</horario></br>"
+        respuesta += "<accesibilidad>"+str(m.accesibilidad)+"</accesibilidad></br>"
+        respuesta += "<direccion>"+m.nombre_via+" "+m.num+" "+m.localidad+" "+m.provincia+" "+str(m.codigo_postal)+" "+m.distrito+"</direccion></br>"
+        respuesta += "<contacto>"+m.telefono+"</contacto></br>"
+
+    return HttpResponse(respuesta)
 
 
 

@@ -4,17 +4,27 @@
 {% extends 'museosMadrid/base.html' %}
 
 		{% block content %}
+
+
+		{% load staticfiles %}	
+			<head>
+				<link rel="stylesheet" href="{% static 'css/museosMadrid_base_roja.css' %}">
+			</head>
+
+
 			<div>
 				<h1>{{ usuario.titulo }} ({{ username }})</h1>
 			</div>
 			</br>
 			<div>
-				<p><h4>De un título a su página personal</h4></p>
-				<form action="/{{ username }}" method="POST">
-					{% csrf_token %}
-					<label for="titulo"></label><input name="titulo" type="text">
-					<button type="submit">Poner título</button>
-				</form>
+				{% if request.user.username == username %}
+					<p><h4>De un título a su página personal</h4></p>
+					<form action="/{{ username }}" method="POST">
+						{% csrf_token %}
+						<label for="titulo"></label><input name="titulo" type="text">
+						<button type="submit">Poner título</button>
+					</form>
+				{% endif %}
 			</div>
 
 			<p><h3><b>[+] Museos favoritos de {{ username }}: </b><h3></p>
@@ -30,6 +40,39 @@
 					<input type="submit" value="Ver más">
 				</form>
 
+
+			{% if request.user.username == username %}
+				<div class="col-sm-4">
+					<form action="/colores" method="POST">
+						{% csrf_token %}
+						<h4>Selecciona un color para el background:</h4>
+						<input type="radio" name="bgcolor" value=1 checked> Azul<br>
+						<input type="radio" name="bgcolor" value=2 > Rojo<br>
+						<input type="radio" name="bgcolor" value=3 > Ninguno<br>
+						<button type="submit">Aplicar</button>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<form action="/colores" method="POST">
+						{% csrf_token %}
+						<h4>Selecciona un color para el texto:</h4>
+						<input type="radio" name="cletras" value=1 checked> Negro<br>
+						<input type="radio" name="cletras" value=2 > Blanco<br>
+						<input type="radio" name="cletras" value=3 > Rojo<br>
+						<button type="submit">Aplicar</button>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<form action="/colores" method="POST">
+						{% csrf_token %}
+						<h4>Selecciona un tamaño para el texto:</h4>
+						<input type="radio" name="tletras" value=1 checked> Small<br>
+						<input type="radio" name="tletras" value=2> Large<br>
+						<button type="submit">Aplicar</button>
+					</form>
+				</div>
+			{% endif %}
+
 		{% endblock %}
 
-
+er

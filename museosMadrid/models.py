@@ -63,7 +63,9 @@ class Usuario(models.Model):
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, blank=True, null=True)
     museos = models.ManyToManyField(Museo, blank=True, null=True)
     titulo = models.CharField(max_length=300, default="Pagina del usuario")
-    color_fondo = models.CharField(max_length=15, blank=True, null=True)
+    bgcolor = models.PositiveSmallIntegerField(default=1)
+    cletras = models.PositiveSmallIntegerField(default=1)
+    tletras = models.PositiveSmallIntegerField(default=1)
     count = models.PositiveSmallIntegerField(default=0)
 
 
