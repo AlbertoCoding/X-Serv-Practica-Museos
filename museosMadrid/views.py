@@ -45,14 +45,30 @@ def home(request): #Para el /
     if len(museos_para_mostrar) < 5:
         for museo in museos:
             if museo.n_comentarios != 0 and len(museos_para_mostrar) < 5:
-                museos_para_mostrar.append(museo)
+                var = 0
+                e = 0
+                while e < len(museos_para_mostrar):
+                    if museos_para_mostrar[e].museo_id == museo.museo_id:
+                        var = 1
+                    e = e + 1
+                if var == 0:
+                    museos_para_mostrar.append(museo)
+
+
     if len(museos_para_mostrar) == 5:
         for museo in museos:
-            if museo.n_comentarios > museos_para_mostrar[0].n_comentarios or museo.n_comentarios > museos_para_mostrar[1].n_comentarios or museo.n_comentarios > museos_para_mostrar[2].n_comentarios or museo.n_comentarios > museos_para_mostrar[3].n_comentarios or museo.n_comentarios > museos_para_mostrar[4].n_comentarios:
-                museos_para_mostrar[pos_num_menor(museos_para_mostrar)] = museo
 
+            if (museo.n_comentarios > museos_para_mostrar[0].n_comentarios) or (museo.n_comentarios > museos_para_mostrar[1].n_comentarios) or (museo.n_comentarios > museos_para_mostrar[2].n_comentarios) or (museo.n_comentarios > museos_para_mostrar[3].n_comentarios):
 
-    return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar, 'usuarios': usuarios})
+                if (museo.n_comentarios > museos_para_mostrar[4].n_comentarios) and (museo.museo_id != museos_para_mostrar[0].museo_id) and (museo.museo_id != museos_para_mostrar[1].museo_id) and (museo.museo_id != museos_para_mostrar[2].museo_id) and (museo.museo_id != museos_para_mostrar[3].museo_id) and (museo.museo_id != museos_para_mostrar[4].museo_id):
+
+                    museos_para_mostrar[pos_num_menor(museos_para_mostrar)] = museo
+
+    autenticado = False
+    if request.user.is_authenticated():
+        autenticado = True
+
+    return render(request, 'museosMadrid/home.html', {'museos': museos_para_mostrar, 'usuarios': usuarios, 'autenticado': autenticado})
 
 
 

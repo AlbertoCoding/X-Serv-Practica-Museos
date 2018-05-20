@@ -52,25 +52,28 @@ body {
 </style>
 	<body>
 
-		<div class="login-box">
-  	 		<form action="/login" method="POST">
-				{% csrf_token %}
-       			<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
-   				<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
-        		<button type="submit">Login</button>
-        	</form>
-		</div>
+		{% if autenticado == False %}
+			<div class="login-box">
+  	 			<form action="/login" method="POST">
+					{% csrf_token %}
+       				<label for="id_username">Nombre de usuario: </label> <input id="id_username" name="username" type="text" /></br>
+   					<label for="id_password">Contraseña: </label> <input id="id_password" name="password" type="password" /></br>
+        			<button type="submit">Login</button>
+        		</form>
+			</div>
+		{% else %}
+			<div class="logout-box">
+				<form action="/logout" method="POST">
+					{% csrf_token %}
+					<button type="submit">Logout</button>
+				</form>
+			</div>
+	
+			<div class="log-comment">
+				<p>Estás loggeado como: {{ request.user.username }}</p>
+			</div>
+		{% endif%}
 
-		<div class="logout-box">
-			<form action="/logout" method="POST">
-				{% csrf_token %}
-				<button type="submit">Logout</button>
-			</form>
-		</div>
-
-		<div class="log-comment">
-			<p>Estás loggeado como: {{ request.user.username }}</p>
-		</div>
 
 		<div id="navbar" class="navbar-collapse collapse">
 			<div class="page-menu">
@@ -136,37 +139,37 @@ body {
 						<div class="col-sm-3">
 							<h5>Get started</h5>
 							<ul>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">How to find new museums?</a></li>
+								<li><a href="#">Find interesting museums in your area</a></li>
+								<li><a href="#">Check what other people visited></a></li>
 							</ul>
 						</div>
 						<div class="col-sm-3">
 							<h5>About us</h5>
 							<ul>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">Meet the team</a></li>
+								<li><a href="#">How everything started?</a></li>
+								<li><a href="#">About the subject</a></li>
 							</ul>
 						</div>
 						<div class="col-sm-3">
 							<h5>Support</h5>
 							<ul>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">Collaborate with us</a></li>
+								<li><a href="#">Donations</a></li>
+								<li><a href="#">Send us feedback</a></li>
 							</ul>
 						</div>
 						<div class="col-sm-3">
 							<h5>Legal</h5>
 							<ul>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
-								<li><a href="#">LoremIpsum</a></li>
+								<li><a href="#">Bases legales de la web</a></li>
+								<li><a href="#">Normas de los museos</a></li>
+								<li><a href="#">Finalidad de la web</a></li>
 							</ul>
 						</div>
 
-					<a style="margin-left: 30px;" href="#">LoremIpsum</a>
+					<a style="margin-left: 30px;" href="#">Más información sobre nuestro trabajo</a>
 			</footer>
 		</div>		
 	</body>
